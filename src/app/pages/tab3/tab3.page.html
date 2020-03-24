@@ -7,11 +7,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-content #container padding>
+    <img [lazyLoad]="'https://upload.wikimedia.org/wikipedia/commons/4/43/Escudo_de_Millonarios_temporada_2017.png'" [customObservable]="container.ionScroll" />
+W
+<img [defaultImage]="defaultImage"
+         [lazyLoad]="images"
+         [useSrcset]="true">
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
+      
+
+
+
+         <div [defaultImage]="defaultImage" [lazyLoad]="images"></div>
+  </ion-content>
+
+ 
 </ion-content>

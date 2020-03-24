@@ -3,6 +3,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NoticiaComponent } from './noticia/noticia.component';
+import { LazyLoadImageModule, scrollPreset ,intersectionObserverPreset} from 'ng-lazyload-image'; // <-- include scrollPreset
 
 
 
@@ -13,7 +14,10 @@ import { NoticiaComponent } from './noticia/noticia.component';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    LazyLoadImageModule.forRoot({
+      preset: intersectionObserverPreset // <-- tell LazyLoadImage that you want to use scrollPreset
+    }),
   ]
 })
 export class ComponentsModule { }

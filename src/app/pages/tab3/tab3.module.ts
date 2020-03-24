@@ -5,13 +5,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
-
+import { LazyLoadImageModule, scrollPreset ,intersectionObserverPreset } from 'ng-lazyload-image';
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
+    LazyLoadImageModule.forRoot({
+      preset :  intersectionObserverPreset   //  <- dile a LazyLoadImage que quieres usar scrollPreset
+    }),
     RouterModule.forChild([{ path: '', component: Tab3Page }])
   ],
   declarations: [Tab3Page]

@@ -32,19 +32,27 @@ export class Tab2Page implements OnInit {
  
       this.noticias = [];
     
-    console.log("cambio de categoria",event.detail.value);
+
     this.cargarNoticias(event.detail.value);
 
 
   }
 
 
-  async  cargarNoticias(categoria:string ){
+
+  async  cargarNoticias(categoria:string , event?){
     const loading = await this.loadingCtrl.create();
 
-    this.noticiaService.getTopHeadLinesCategoria(categoria).subscribe(resp => {
+
+  
+    this.noticiaService.getTopHeadlinesCategoria(categoria).subscribe(resp => {
       loading.dismiss().then(() => {
-        this.noticias = resp.articles;
+
+        this.noticias.push(...resp.articles);
+
+        if(event){
+          event.target.complete();
+        }
     
       console.log(this.noticias);
       });
@@ -52,5 +60,26 @@ export class Tab2Page implements OnInit {
     });
 
     return await loading.present();
+  }
+
+
+
+  carganoticasload(categoria:string , event?){
+    this.noticiaService.getTopHeadlinesCategoria(categoria).subscribe(resp => {
+    
+
+      this.noticias.push( ...resp.articles );
+
+      if ( event ) {
+        event.target.complete();
+      }
+
+      });
+
+  }
+
+  
+  loadData(event){
+    this.carganoticasload( this.segmet.value, event);
   }
 }

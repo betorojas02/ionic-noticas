@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiKey:'d77417bdae31475bae1674735aca2142',
-  apiUrl:'http://newsapi.org/v2'
+  apiKey: 'dc62b49904694e81adf392d7e45a2365',
+  apiUlr: 'https://newsapi.org/v2'
 };

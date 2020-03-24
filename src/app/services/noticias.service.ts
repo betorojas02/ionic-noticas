@@ -1,41 +1,64 @@
-import { environment } from './../../environments/environment';
-import { RespuestaTopHeadlines } from './../interfaces/interfaces';
-import { HttpClientModule, HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RespuestaTopHeadlines } from '../interfaces/interfaces';
+import { environment } from '../../environments/environment';
 
 
 const apiKey = environment.apiKey;
-
-const apiUrl = environment.apiUrl;
-
+const apiUlr = environment.apiUlr;
 
 const headers = new HttpHeaders({
-  'x-Api-Key':apiKey
+  'X-Api-key': apiKey
 });
 
+
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class NoticiasService {
-  constructor(private http: HttpClient) {}
+
+  headlinesPage = 0;
+
+  categoriaActual = '';
+  categoriaPage = 0;
+
+  constructor( private http: HttpClient ) { }
 
 
-  private ejecutarQuery<T>(query:string){
+  private ejecutarQuery<T>( query: string ) {
 
-    let url = apiUrl + query;
- 
-    return this.http.get<T>(url, {headers});
+    query = apiUlr + query;
+
+    return this.http.get<T>( query, { headers } );
+
   }
 
-  getTopHeadLines() {
 
-    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=co`);
+  getTopHeadlines() {
+
+    this.headlinesPage++;
+
+    // tslint:disable-next-line:max-line-length
+    // return this.http.get<RespuestaTopHeadlines>(`https://newsapi.org/v2/top-headlines?country=us&apiKey=dc62b49904694e81adf392d7e45a2365`);
+
+    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=co&page=${ this.headlinesPage }`);
+  }
+
+  getTopHeadlinesCategoria( categoria: string ) {
+
+    if ( this.categoriaActual === categoria ) {
+      this.categoriaPage++;
+    } else {
+      this.categoriaPage = 1;
+      this.categoriaActual = categoria;
+    }
+
+
+    // return this.http.get(`https://newsapi.org/v2/top-headlines?country=de&category=business&apiKey=dc62b49904694e81adf392d7e45a2365`);
+
+    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=co&category=${ categoria }&page=${ this.categoriaPage }`);
+
 
   }
 
-
-  getTopHeadLinesCategoria(categoria:string){
-    return this.ejecutarQuery<RespuestaTopHeadlines>(`/top-headlines?country=co&category=${ categoria }`);
-  } 
-  
 }

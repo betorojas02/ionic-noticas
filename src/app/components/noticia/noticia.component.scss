@@ -1,0 +1,15 @@
+.noticia-more {
+    font-size: 25px !important;
+    position: absolute;
+    right: -10px;
+    top: -18px;
+}
+
+
+img.ng-lazyloaded { 
+    animation: fadein .5s;
+}
+@keyframes fadein {
+    from { opacity: 0; }
+    to { opacity: 1; } 
+}

@@ -1,26 +1,20 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Favoritos
     </ion-title>
   </ion-toolbar>
+
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-content #container padding>
-    <img [lazyLoad]="'https://upload.wikimedia.org/wikipedia/commons/4/43/Escudo_de_Millonarios_temporada_2017.png'" [customObservable]="container.ionScroll" />
-W
-<img [defaultImage]="defaultImage"
-         [lazyLoad]="images"
-         [useSrcset]="true">
 
 
-      
+<ion-content>
 
-
-
-         <div [defaultImage]="defaultImage" [lazyLoad]="images"></div>
-  </ion-content>
-
- 
+  <ion-slides [options]="sliderOpts"  *ngIf="dataLocalService.noticas.length === 0">
+    <ion-slide>
+      <ion-label>No hay favortios</ion-label>
+    </ion-slide>
+  </ion-slides>
+<app-noticias *ngIf="dataLocalService.noticas.length > 0" [noticias]="dataLocalService.noticas"></app-noticias>
 </ion-content>

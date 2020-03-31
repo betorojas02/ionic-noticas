@@ -1,7 +1,7 @@
-import { Article } from './../../interfaces/interfaces';
-import { NoticiasService } from './../../services/noticias.service';
+import { Article } from '../../interfaces/interfaces';
+import { NoticiasService } from '../../services/noticias.service';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { LoadingController,IonSegment } from '@ionic/angular';
+import { LoadingController, IonSegment } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -10,16 +10,16 @@ import { LoadingController,IonSegment } from '@ionic/angular';
 })
 export class Tab2Page implements OnInit {
 
-  noticias :Article[]=[];
-  @ViewChild(IonSegment,{static: true}) segmet: IonSegment;
+  noticias: Article[] = [];
+  @ViewChild(IonSegment, {static: true}) segmet: IonSegment;
 
   categorias = ['business', 'entertainment', 'general', 'health', 'science', 'sports', 'technology'];
 
 
-  constructor(private noticiaService:NoticiasService, public loadingCtrl: LoadingController) {}
+  constructor(private noticiaService: NoticiasService, public loadingCtrl: LoadingController) {}
 
 
-  ngOnInit(){
+  ngOnInit() {
     this.segmet.value = this.categorias[0];
 
 
@@ -27,36 +27,36 @@ export class Tab2Page implements OnInit {
 
   }
 
-    cambioCategoria(event){
+    cambioCategoria(event) {
 
- 
+
       this.noticias = [];
-    
 
-    this.cargarNoticias(event.detail.value);
+
+      this.cargarNoticias(event.detail.value);
 
 
   }
 
 
 
-  async  cargarNoticias(categoria:string , event?){
+  async  cargarNoticias(categoria: string , event?) {
     const loading = await this.loadingCtrl.create();
 
 
-  
+
     this.noticiaService.getTopHeadlinesCategoria(categoria).subscribe(resp => {
       loading.dismiss().then(() => {
 
         this.noticias.push(...resp.articles);
 
-        if(event){
+        if (event) {
           event.target.complete();
         }
-    
-      console.log(this.noticias);
+
+        console.log(this.noticias);
       });
-   
+
     });
 
     return await loading.present();
@@ -64,9 +64,9 @@ export class Tab2Page implements OnInit {
 
 
 
-  carganoticasload(categoria:string , event?){
+  carganoticasload(categoria: string , event?) {
     this.noticiaService.getTopHeadlinesCategoria(categoria).subscribe(resp => {
-    
+
 
       this.noticias.push( ...resp.articles );
 
@@ -78,8 +78,8 @@ export class Tab2Page implements OnInit {
 
   }
 
-  
-  loadData(event){
+
+  loadData(event) {
     this.carganoticasload( this.segmet.value, event);
   }
 }

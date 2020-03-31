@@ -1,18 +1,32 @@
-<ion-card (click)="abrirNoticia()">
+<ion-card >
+
   <ion-card-header>
     <ion-card-subtitle>
-      <span class="text-primary">{{indice + 1}}.</span>
-      <span class="noticia-source-name">  {{noticia.source.name}}</span>
+      <span class="text-primary"> {{ indice + 1 }}. </span>
+      <span class="noticia-source-name">{{ noticia.source.name }}</span>
+
+      <div class="noticia-more">
+        <ion-button fill="clear"
+                    (click)="lanzarMenu()">
+          <ion-icon slot="icon-only"
+                    name="ellipsis-vertical"></ion-icon>
+          </ion-button>
+      </div>
+
+
     </ion-card-subtitle>
-    <ion-card-title>{{noticia.title}}</ion-card-title>
+    <ion-card-title (click)="abrirNoticia()">{{ noticia.title }} </ion-card-title>
   </ion-card-header>
 
-  <ion-content #container padding>
-  <img  [lazyLoad]="noticia.urlToImage"  />
-  </ion-content>
+  <ion-img *ngIf="noticia.urlToImage"
+           (click)="abrirNoticia()"
+           class="animated fadeIn fast"
+           [src]="noticia.urlToImage"></ion-img>
+
   <ion-card-content>
     <p>
-      {{noticia.description}}
+      {{ noticia.description }}
     </p>
   </ion-card-content>
+
 </ion-card>

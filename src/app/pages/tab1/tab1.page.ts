@@ -1,11 +1,11 @@
 import { Article } from './../../interfaces/interfaces';
-import { Component, OnInit } from "@angular/core";
-import { NoticiasService } from "./../../services/noticias.service";
+import { Component, OnInit } from '@angular/core';
+import { NoticiasService } from './../../services/noticias.service';
 
 @Component({
-  selector: "app-tab1",
-  templateUrl: "tab1.page.html",
-  styleUrls: ["tab1.page.scss"]
+  selector: 'app-tab1',
+  templateUrl: 'tab1.page.html',
+  styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
 
@@ -20,24 +20,25 @@ export class Tab1Page implements OnInit {
 
   }
 
-  cargarNoticias(event?){
+  cargarNoticias(event?) {
     this.noticasService.getTopHeadlines().subscribe(resp => {
 
-      if(resp.articles.length == 0 ){
+      // tslint:disable-next-line:triple-equals
+      if (resp.articles.length == 0 ) {
         event.target.disabled = true;
         return;
       }
-    
+
 
       this.noticias.push(...resp.articles);
 
-      if(event){
+      if (event) {
         event.target.complete();
       }
     });
   }
 
-  loadData(event){
+  loadData(event) {
     this.cargarNoticias(event);
   }
 }

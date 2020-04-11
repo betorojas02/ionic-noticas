@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+// @ts-ignore
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3Page } from './tab3.page';

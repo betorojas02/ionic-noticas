@@ -6,15 +6,11 @@
   </ion-toolbar>
 
 </ion-header>
-
-
-
 <ion-content>
-
   <ion-slides [options]="sliderOpts"  *ngIf="dataLocalService.noticas.length === 0">
     <ion-slide>
       <ion-label>No hay favortios</ion-label>
     </ion-slide>
   </ion-slides>
-<app-noticias *ngIf="dataLocalService.noticas.length > 0" [noticias]="dataLocalService.noticas"></app-noticias>
+<app-noticias *ngIf="dataLocalService.noticas.length > 0" [enFavoritos]="true" [noticias]="dataLocalService.noticas"></app-noticias>
 </ion-content>

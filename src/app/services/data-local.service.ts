@@ -34,11 +34,17 @@ export class DataLocalService {
 
     if ( favoritos ) {
       this.noticas = favoritos;
-    } else{
+    } else {
       this.noticas = [];
     }
 
     console.log('async await', favoritos);
 
   }
+
+    borrarNoticia(noticia: Article) {
+
+      this.noticas = this.noticas.filter(noti => noti.title !== noticia.title);
+      this.storage.set('favoritos', this.noticas);
+    }
 }

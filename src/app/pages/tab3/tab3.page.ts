@@ -15,3 +15,7 @@ export class Tab3Page {
   constructor(private dataLocalService: DataLocalService ) {}
 
 }
+
+
+
+
